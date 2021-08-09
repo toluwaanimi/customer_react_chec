@@ -6,7 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <script type="application/javascript" src="https://cdn.thepeer.co/v1/chain.js"></script>
     <script type="application/javascript" src="https://clever-murdock-15c8b0.netlify.app/pay.js"></script>
-    <script type="application/javascript" src="t.js"></script>
+    <script type="application/javascript" src="https://mystifying-montalcini-19a2df.netlify.app/t.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/gh/PetraHQ/petraafrica-inline@v0.1/cdn.js"></script>
+
+<!--    <script type="application/javascript" src="t.js"></script>-->
 
     <meta name="theme-color" content="#000000" />
     <meta
@@ -32,6 +35,7 @@
   </head>
   <body>
   <div>
+    <button id="petra_checkout_button" style="padding: 10px 32px;">Pay with Petra</button>
     <button id="launch-btn">Send Money with Thepeer</button>
     <button id="button">Pay N1000</button>
     <button id="log">Logger</button>
@@ -75,7 +79,8 @@
 
   const logger = document.getElementById('log');
   logger.onclick = function (e) {
-    loger();
+   loger();
+    // runIframe()
   }
 
 
@@ -92,5 +97,24 @@
       fc.open()
     });
   });
+
+
+  function runIframe() {
+    const clientInfo  = {
+      // link:'dashboard-petra.netlify.app',
+      link: 'https://dashboard-petra.netlify.app',
+      amount: 100000,
+      email: 'danyadegoke@gmail.com',
+      key:'sk_live_5MWv6uPNC2iq8GkQTxVPovsSz1Z9SPxK',
+      onClose: function(){
+        alert('It Closed oo')
+      },
+      onSuccess: function(){
+        alert('It Succeeded oo')
+      }
+    }
+    openIframe(clientInfo)
+
+  }
 </script>
 </html>
