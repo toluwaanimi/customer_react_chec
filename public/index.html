@@ -1,9 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/html">
   <head>
     <meta charset="utf-8" />
     <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script type="application/javascript" src="https://cdn.thepeer.co/v1/chain.js"></script>
+    <script type="application/javascript" src="https://clever-murdock-15c8b0.netlify.app/pay.js"></script>
+    <script type="application/javascript" src="t.js"></script>
+
     <meta name="theme-color" content="#000000" />
     <meta
       name="description"
@@ -27,8 +31,15 @@
     <title>React App</title>
   </head>
   <body>
+  <div>
+    <button id="launch-btn">Send Money with Thepeer</button>
+    <button id="button">Pay N1000</button>
+    <button id="log">Logger</button>
+  </div>
     <noscript>You need to enable JavaScript to run this app.</noscript>
-    <div id="root"></div>
+    <div id="root">
+
+    </div>
     <!--
       This HTML file is a template.
       If you open it directly in the browser, you will see an empty page.
@@ -40,4 +51,46 @@
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
   </body>
+<script>
+  let send = new ThePeer({
+    publicKey: "pspk_test_qyyhqsgdcv5ld8gcnvwhey8p5zg8skzya6u8q3bs8lwrg",
+    amount: 60000,
+    userReference: "stay-foolish-stay-hungry-forever",
+    receiptUrl: "https://apple.com/thepeer",
+    onSuccess: function (event) {
+      console.log(event);
+    },
+    onClose: function (event) {
+      console.log(event)
+    },
+    onError: function (error) {
+      console.log(error)
+    }
+  });
+  send.setup();
+  const launch = document.getElementById('launch-btn');
+  launch.onclick = function (e) {
+    send.open();
+  };
+
+  const logger = document.getElementById('log');
+  logger.onclick = function (e) {
+    loger();
+  }
+
+
+  document.addEventListener("DOMContentLoaded", function(event) {
+    const fc = new Fluidcoins({
+      amount: 100000,
+      email: 'xyz_fhifhf@gmail.com',
+      key: 'pk_test_3a068a72aada46f3b8a8d3fe904464e9'
+    })
+    fc.setup()
+
+    const button = document.getElementById('button')
+    button.addEventListener('click', function(){
+      fc.open()
+    });
+  });
+</script>
 </html>
